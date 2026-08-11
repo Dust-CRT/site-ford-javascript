@@ -6,7 +6,6 @@ class contato {
 }
 
 function Post(form) {
-
   let data = new contato(form.elements.namedItem("nome").value,
             form.elements.namedItem("sobrenome").value, 
             form.elements.namedItem("email").value, 
@@ -17,7 +16,6 @@ function Post(form) {
 }
 
 function Enviar() {
-
     var nome = document.getElementById("nomeid");
 
     if (nome.value != "") {

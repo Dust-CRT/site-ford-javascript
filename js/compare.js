@@ -3,11 +3,13 @@
 let carArr = [];
 
 class Car {
-   
+   carItems = [nome, preco, alturaCacamba, alturaVeiculo, alturaSolo, capacidadeCarga, motor, potencia, volumeCacamba, roda, image]
 
-    constructor(nome, preco, alturaCacamba, alturaVeiculo, alturaSolo, capacidadeCarga, motor, potencia, volumeCacamba, roda, image){
-       
-    }
+   constructor(carItems){
+        for (item in carItems) {
+            this.item = carItems[item]
+        }
+   }
 } 
 
 // search on array if exist carClass returning 1 if not return -1
@@ -19,8 +21,7 @@ function GetCarArrPosition(arr, carClass) {
     return -1;
 }
 
-function SetCarToCompare(el, carClass) {
-   
+function SetCarToCompare(el, carClass) {  
     if(carClass instanceof Car){       
         if(el.checked){
                 

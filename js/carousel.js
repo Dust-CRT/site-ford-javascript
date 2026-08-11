@@ -7,10 +7,7 @@ let carouselArr = [];
 
 
 //class Carousel
-class Carousel {
-
-    
-      
+class Carousel {  
     static Start(arr){
         if(arr){
 
@@ -27,6 +24,22 @@ class Carousel {
     }
 
     static Next(){
-        
+        const item = carouselArr[Carousel._sequence];
+        const carDiv = document.getElementById("carrousel");
+        const carTitleDiv = document.getElementById("carrousel_title")
+
+        if (carDiv) {
+            if (carDiv.tagName == "img") {
+                carDiv.src = item.img;
+            } else {
+                carDiv.style.backgroundImage = "url('${item.img}')"
+            }
+        } 
+
+        if (carTitleDiv) { 
+            carTitleDiv.innerHTML =  "<a href='${item.url}'>${item.title}</a>"
+        }
+
+        Carousel._sequence = (Carousel._sequence + 1) & Carousel._size;
     }
 };
