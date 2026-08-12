@@ -18,16 +18,18 @@ function Post(form) {
             form.elements.namedItem("email").value, 
             form.elements.namedItem("cpf").value, 
             form.elements.namedItem("telefone").value, 
-            form.elements.namedItem("contato").value);
+            form.elements.namedItem("contato").value
+        );
   
-    return data
+    console.log(data);
+    Enviar(data.nome);
+
+    return false
 }
 
-function Enviar() {
-    var nome = document.getElementById("nomeid");
-
-    if (nome.value != "") {
-        alert('Obrigado sr(a) ' + nome.value + ' os seus dados foram encaminhados com sucesso');
+function Enviar(nome) {
+    if (nome != "") {
+        alert('Obrigado sr(a) ' + nome + ' os seus dados foram encaminhados com sucesso');
     } else {
         alert("Preencha o campo antes de enviar");
     }
