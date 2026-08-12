@@ -1,4 +1,3 @@
-
 //car
 let carArr = [];
 
@@ -18,34 +17,36 @@ class Car {
         this.image = image;
     }
 
-} 
+}
 
-// search on array if exist carClass returning 1 if not return -1
+// search on array if exist carClass returning position, if not return -1
 function GetCarArrPosition(arr, carClass) {
-    for(let i = 0; i < arr.length; i++){
-        if(arr[i].nome  === carClass.nome)
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].nome === carClass.nome)
             return i;
     }
     return -1;
 }
 
-function SetCarToCompare(el, carClass) {  
-    if(carClass instanceof Car){       
-        if(el.checked){
-            if (pos === 1) {    
-                if ( carArr.length < 2) {
+function SetCarToCompare(el, carClass) {
+    if (carClass instanceof Car) {
+        const pos = GetCarArrPosition(carArr, carClass); // faltava essa linha
+
+        if (el.checked) {
+            if (pos === -1) { // -1 = carro ainda não está no array (não "pos === 1")
+                if (carArr.length < 2) {
                     carArr.push(carClass);
                 } else {
                     el.checked = false;
-                    alert("Você já selecionou 2 veiculos.")
+                    alert("Você já selecionou 2 veiculos.");
                 }
             }
-            
+
         } else {
-          if (pos !== -1) {
-            carArr.splice(pos, 1);
-          } 
-        } 
+            if (pos !== -1) {
+                carArr.splice(pos, 1);
+            }
+        }
     } else {
         throw "You need set a Car Class";
     }
@@ -53,7 +54,7 @@ function SetCarToCompare(el, carClass) {
 
 
 function ShowCompare() {
-    if(carArr.length < 2) {
+    if (carArr.length < 2) {
         alert("Precisa marcar 2 carros para apresentar a comparação");
         return;
     }
@@ -62,42 +63,43 @@ function ShowCompare() {
     document.getElementById("compare").style.display = "block";
 }
 
-function HideCompare(){
-    document.getElementById("compare").style.display = "none"; 
+function HideCompare() {
+    document.getElementById("compare").style.display = "none";
 }
 
-function setCellText(id, val) { 
+function setCellText(id, val) {
     const el = document.getElementById(id);
     if (el) {
         el.innerText = val;
     }
-
 }
 
 function setCellHtml(id, html) {
     const el = document.getElementById(id);
     if (el) {
-        el.innerHTML = html;  
+        el.innerHTML = html;
     }
 }
 
 function formatValue(val) {
-    return new Intl.NumberFormat("pt-br", {style: "currency", currency: "BRL"}).format(val);
+    return new Intl.NumberFormat("pt-br", { style: "currency", currency: "BRL" }).format(val);
 }
 
 function UpdateCompareTable() {
+    // IDs reais do lancamento.html: compare_<campo>_0 e compare_<campo>_1
     carArr.forEach((car, i) => {
         const col = i;
 
-        SetCellText(`compare-nome-${col}`, car.nome);
-        SetCellText(`compare-altura-cacamba-${col}`, car.alturaCacamba);
-        SetCellText(`compare-altura-veiculo-${col}`, car.alturaVeiculo);
-        SetCellText(`compare-altura-solo-${col}`, car.alturaSolo);
-        SetCellText(`compare-capacidade-carga-${col}`, car.capacidadeCarga);
-        SetCellText(`compare-motor-${col}`, car.motor);
-        SetCellText(`compare-potencia-${col}`, car.potencia);
-        SetCellText(`compare-volume-cacamba-${col}`, car.volumeCacamba);
-        SetCellText(`compare-roda-${col}`, car.roda);
-        SetCellText(`compare-preco-${col}`, car.preco);
+        setCellHtml(`compare_image_${col}`, `<img src="${car.image}" width="100">`);
+        setCellText(`compare_modelo_${col}`, car.nome);
+        setCellText(`compare_alturacacamba_${col}`, car.alturaCacamba);
+        setCellText(`compare_alturaveiculo_${col}`, car.alturaVeiculo);
+        setCellText(`compare_alturasolo_${col}`, car.alturaSolo);
+        setCellText(`compare_capacidadecarga_${col}`, car.capacidadeCarga);
+        setCellText(`compare_motor_${col}`, car.motor);
+        setCellText(`compare_potencia_${col}`, car.potencia);
+        setCellText(`compare_volumecacamba_${col}`, car.volumeCacamba);
+        setCellText(`compare_roda_${col}`, car.roda);
+        setCellText(`compare_preco_${col}`, formatValue(car.preco));
     });
 }
