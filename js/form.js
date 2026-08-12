@@ -29,7 +29,7 @@ function Post(form) {
 
 function Enviar(nome) {
     if (nome != "") {
-        alert('Obrigado sr(a) ' + nome + ' os seus dados foram encaminhados com sucesso');
+        alert('Obrigado ' + nome + '! os seus dados foram encaminhados com sucesso');
     } else {
         alert("Preencha o campo antes de enviar");
     }
